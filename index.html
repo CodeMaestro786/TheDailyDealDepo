@@ -1,148 +1,85 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Daily Deal Depo — Benoni's General Dealer</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="logo.png" />
-  
-  <script type="module">
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-
-  const supabase = createClient('YOUR_SUPABASE_URL', 'YOUR_SUPABASE_ANON_KEY');
-
-  async function loadProducts() {
-    const { data, error } = await supabase.from('products').select('*');
-
-    const productsContainer = document.getElementById('productsContainer');
-    productsContainer.innerHTML = '';
-    data.forEach(product => {
-      const productElement = document.createElement('div');
-      productElement.classList.add('product');
-      productElement.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
-        <h3>${product.name}</h3>
-        <p>${product.description}</p>
-        <p>Price: $${product.price}</p>
-      `;
-      productsContainer.appendChild(productElement);
-    });
-  }
-
-  window.onload = loadProducts;
-</script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Daily Deal Depo</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="https://i.ibb.co/6RQw1jJy/tddd.jpg">
 </head>
 <body>
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="container header-grid">
-      <div class="brand">
-        <a href="#">
-          <img src="https://i.ibb.co/6RQw1jJy/tddd.jpg" alt="Daily Deal Depo logo" class="logo" />
-          <div class="brand-text">
-            <h1>The Daily Deal Depo</h1>
-            <p class="tag">Quality. Value. Convenience. Every day</p>
-          </div>
-        </a>
-      </div>
-      <div class="header-actions">
-        <div class="contact">📍 23B Voortrekker Road, Benoni</div>
-        <a class="cta-whatsapp" href="https://wa.me/27649076059" target="_blank">WhatsApp: 064 907 6059</a>
-        <button id="btn-admin" class="btn btn-outline">Admin</button>
-      </div>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <h2>Benoni's trusted one-stop general dealer</h2>
-        <p>Unbeatable prices on groceries, household goods, cleaning products, personal care and more. Find once-off gems or stock up on everyday essentials.</p>
-        <div class="hero-cta">
-          <a href="#catalog" class="btn btn-primary">Shop Now</a>
-          <a href="#deals" class="btn btn-ghost">See Deals</a>
-        </div>
-        <ul class="features">
-          <li>✨ Everyday essentials</li>
-          <li>🛒 Bulk & single items</li>
-          <li>💸 Affordable prices</li>
-        </ul>
-      </div>
-      <div class="hero-media">
-        <div class="card-decor">
-          <img src="https://images.unsplash.com/photo-1586201375761-83865001e9d5?auto=format&fit=crop&w=800&q=60" alt="Groceries" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DEALS -->
-  <section id="deals" class="section container">
-    <div class="section-header">
-      <h3>🔥 Today’s Hot Deals</h3>
-      <p>Save big on these limited offers!</p>
-    </div>
-    <div id="deals-carousel" class="carousel"></div>
-  </section>
-
-  <!-- CATALOG -->
-  <section id="catalog" class="section container">
-    <div class="section-header">
-      <h3>🛍️ Browse Catalogue</h3>
-      <div class="catalog-controls">
-        <input id="search" type="search" placeholder="Search products..." />
-        <select id="filter-cat">
-          <option value="all">All categories</option>
-        </select>
-      </div>
-    </div>
-    <div id="products-grid" class="grid"></div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="section container contact-card">
-    <div class="contact-grid">
+<header class="site-header">
+  <div class="container header-grid">
+    <div class="brand">
+      <img src="https://i.ibb.co/6RQw1jJy/tddd.jpg" alt="Daily Deal Depo" class="logo">
       <div>
-        <h4>Visit Us</h4>
-        <p>23B Voortrekker Road, Benoni</p>
-      </div>
-      <div>
-        <h4>WhatsApp</h4>
-        <p><a href="https://wa.me/27649076059" target="_blank">064 907 6059</a></p>
-      </div>
-      <div>
-        <h4>Opening Hours</h4>
-        <p>Mon–Sat: 7:30 - 18:00<br>Sun: 8:00 - 13:00</p>
+        <h1>The Daily Deal Depo</h1>
+        <p class="tag">Quality. Value. Convenience. Every day</p>
       </div>
     </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <strong>The Daily Deal Depo</strong>
-        <p>Benoni’s trusted general dealer — quality, value, convenience.</p>
-      </div>
-      <div>
-        <small>© <span id="year"></span> The Daily Deal Depo</small>
-      </div>
-    </div>
-  </footer>
-
-  <!-- MODAL -->
-  <div id="modal" class="modal hidden">
-    <div class="modal-panel">
-      <button class="modal-close" id="modal-close">✕</button>
-      <div id="modal-body"></div>
+    <div class="header-actions">
+      <a href="https://wa.me/27649076059" class="btn cta-whatsapp">💬 WhatsApp Us</a>
+      <button class="btn btn-ghost" onclick="window.location.href='admin-login.html'">Admin</button>
     </div>
   </div>
+</header>
 
-  <script src="scripts.js"></script>
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <h2>Benoni's trusted one-stop general dealer</h2>
+      <p>Unbeatable prices on groceries, household goods, cleaning products, personal care and more.</p>
+      <a href="#productsContainer" class="btn btn-primary">Shop Now</a>
+    </div>
+    <div class="hero-media">
+      <img src="https://images.unsplash.com/photo-1586201375761-83865001e9d5?auto=format&fit=crop&w=800&q=60" alt="Groceries">
+    </div>
+  </div>
+</section>
+
+<section id="catalog" class="section container">
+  <h3>🛍️ Browse Catalogue</h3>
+  <div id="productsContainer" class="grid"></div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <strong>The Daily Deal Depo</strong>
+      <p>Benoni’s trusted general dealer — quality, value, convenience.</p>
+    </div>
+    <div>
+      <small>© <span id="year"></span> The Daily Deal Depo</small>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+const supabaseUrl = 'https://knjpzfhpharpsrnzpmvg.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtuanB6ZmhwaGFycHNybnpwbXZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTczMzg4OTgsImV4cCI6MjA3MjkxNDg5OH0.HO_p71TKAKYXEsMHoWVMgGWCk2rj9YajZs53BRRDTgU';
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+async function loadProducts() {
+  const { data, error } = await supabase.from('products').select('*');
+  if(error) return console.error(error);
+  const container = document.getElementById('productsContainer');
+  container.innerHTML = '';
+  data.forEach(product => {
+    const div = document.createElement('div');
+    div.classList.add('card');
+    div.innerHTML = `
+      <img src="${product.image}" alt="${product.name}">
+      <h4>${product.name}</h4>
+      <p>${product.description}</p>
+      <div class="price">R${product.price}</div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+window.onload = loadProducts;
+</script>
 </body>
 </html>
-
-
