@@ -6,6 +6,33 @@
   <title>The Daily Deal Depo — Benoni's General Dealer</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="logo.png" />
+  
+  <script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+  const supabase = createClient('YOUR_SUPABASE_URL', 'YOUR_SUPABASE_ANON_KEY');
+
+  async function loadProducts() {
+    const { data, error } = await supabase.from('products').select('*');
+
+    const productsContainer = document.getElementById('productsContainer');
+    productsContainer.innerHTML = '';
+    data.forEach(product => {
+      const productElement = document.createElement('div');
+      productElement.classList.add('product');
+      productElement.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>${product.description}</p>
+        <p>Price: $${product.price}</p>
+      `;
+      productsContainer.appendChild(productElement);
+    });
+  }
+
+  window.onload = loadProducts;
+</script>
+
 </head>
 <body>
   <!-- HEADER -->
@@ -117,4 +144,5 @@
   <script src="scripts.js"></script>
 </body>
 </html>
+
 
