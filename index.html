@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Daily Deal Depo — Benoni's General Dealer</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-grid">
+      <div class="brand">
+        <a href="#"> 
+          <img src="https://i.ibb.co/6RQw1jJy/tddd.jpg" alt="Daily Deal Depo logo" class="logo" />
+          <div class="brand-text">
+            <h1>The Daily Deal Depo</h1>
+            <p class="tag">Quality. Value. Convenience. Every day</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="header-actions">
+        <div class="contact">📍 23B Voortrekker Road, Benoni</div>
+        <a class="cta-whatsapp" href="https://wa.me/27649076059" target="_blank" rel="noreferrer">WhatsApp: 064 907 6059</a>
+        <button id="btn-admin" class="btn btn-outline">Admin</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <h2>Benoni's trusted one-stop general dealer</h2>
+          <p>Unbeatable prices on groceries, household goods, cleaning products, personal care and more. Browse daily deals, add once-off items to your cart, or stock up on multi-quantity essentials.</p>
+          <div class="hero-cta">
+            <a href="#catalog" class="btn btn-primary">Browse catalogue</a>
+            <a href="#deals" class="btn btn-ghost">Today's deals</a>
+          </div>
+          <ul class="features">
+            <li>Everyday essentials</li>
+            <li>Bulk & single items</li>
+            <li>Community-focused prices</li>
+          </ul>
+        </div>
+        <div class="hero-media">
+          <div class="card-decor">
+            <img src="https://images.unsplash.com/photo-1586201375761-83865001e9d5?auto=format&fit=crop&w=800&q=60" alt="groceries" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="deals" class="container section">
+      <div class="section-header">
+        <h3>Today's Deals</h3>
+        <p>Handpicked bargains — new items added daily.</p>
+      </div>
+      <div id="deals-grid" class="grid"></div>
+    </section>
+
+    <section id="catalog" class="container section">
+      <div class="section-header">
+        <h3>Catalogue</h3>
+        <div class="catalog-controls">
+          <input id="search" type="search" placeholder="Search products, e.g. sugar, soap, rice" />
+          <select id="filter-cat">
+            <option value="all">All categories</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="products-grid" class="grid"></div>
+    </section>
+
+    <section class="container section small">
+      <h3>How to buy</h3>
+      <ol>
+        <li>Browse or search the catalogue.</li>
+        <li>Add items to your cart (single or multiple units).</li>
+        <li>Checkout in-store or contact us via WhatsApp to reserve.</li>
+      </ol>
+    </section>
+
+    <section class="container section contact-card">
+      <div class="contact-grid">
+        <div>
+          <h4>Visit us</h4>
+          <p>23B Voortrekker Road, Benoni</p>
+        </div>
+        <div>
+          <h4>WhatsApp</h4>
+          <p><a href="https://wa.me/27649076059" target="_blank" rel="noreferrer">064 907 6059</a></p>
+        </div>
+        <div>
+          <h4>Opening hours</h4>
+          <p>Mon–Sat: 7:30 - 18:00<br />Sun: 8:00 - 13:00</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>The Daily Deal Depo</strong>
+        <p>Benoni’s trusted general dealer — quality, value, convenience.</p>
+      </div>
+      <div>
+        <small>© <span id="year"></span> The Daily Deal Depo</small>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Admin modal and product modal -->
+  <div id="modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modal-close">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

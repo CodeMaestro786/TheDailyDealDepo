@@ -1,0 +1,311 @@
+/* ========== RESET & BASE STYLES ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background: #fdfdfd;
+  color: #333;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: 0.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ========== HEADER ========== */
+.site-header {
+  background: #222;
+  color: #fff;
+  padding: 1rem 0;
+}
+
+.header-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+}
+
+.brand h1 {
+  font-size: 1.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.brand .tag {
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.contact {
+  font-size: 0.9rem;
+}
+
+.cta-whatsapp {
+  background: #25d366;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  transition: background 0.2s;
+}
+.cta-whatsapp:hover {
+  background: #1ebe5d;
+}
+
+/* ========== BUTTONS ========== */
+.btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background: #0077ff;
+  color: #fff;
+}
+.btn-primary:hover {
+  background: #005fcc;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 2px solid #0077ff;
+  color: #0077ff;
+}
+.btn-ghost:hover {
+  background: #0077ff;
+  color: #fff;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.btn-outline:hover {
+  background: #fff;
+  color: #222;
+}
+
+/* ========== HERO ========== */
+.hero {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, #f8f9fa, #fff);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.hero-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  margin-bottom: 1.5rem;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.features {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.hero-media img {
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* ========== SECTIONS ========== */
+.section {
+  padding: 3rem 0;
+}
+
+.section-header {
+  margin-bottom: 2rem;
+}
+
+.section-header h3 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ========== GRID ========== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ========== PRODUCT CARD ========== */
+.card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+.card h4 {
+  margin: 0.5rem 0;
+}
+.card p {
+  font-size: 0.9rem;
+  color: #555;
+}
+.card .price {
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+
+/* ========== CATALOG CONTROLS ========== */
+.catalog-controls {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.catalog-controls input, 
+.catalog-controls select {
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+/* ========== CONTACT ========== */
+.contact-card {
+  background: #fafafa;
+  border-radius: 0.8rem;
+  padding: 2rem;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+.contact-card h4 {
+  margin-bottom: 0.5rem;
+}
+
+/* ========== FOOTER ========== */
+.site-footer {
+  background: #222;
+  color: #ccc;
+  padding: 2rem 0;
+  margin-top: 2rem;
+}
+
+.footer-grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-grid strong {
+  color: #fff;
+}
+
+/* ========== MODAL ========== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.modal.hidden {
+  display: none;
+}
+.modal-panel {
+  background: #fff;
+  border-radius: 0.8rem;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  border: none;
+  background: transparent;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .header-grid {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
