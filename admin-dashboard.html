@@ -63,6 +63,14 @@
     }
 
     window.onload = loadProducts;
+
+
+  if (localStorage.getItem('adminLoggedIn') !== 'true') {
+    alert('You are not authorized to view this page.');
+    window.location.href = 'admin-login.html';
+  }
+
+
   </script>
 </head>
 <body>
