@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | The Daily Deal Depo</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabase = createClient('YOUR_SUPABASE_URL', 'YOUR_SUPABASE_ANON_KEY');
+
+    async function addProduct(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const price = parseFloat(document.getElementById('price').value);
+      const description = document.getElementById('description').value;
+      const image = document.getElementById('image').value;
+
+      const { data, error } = await supabase
+        .from('products')
+        .insert([{ name, price, description, image }]);
+
+      if (error) {
+        alert('Error adding product');
+      } else {
+        alert('Product added successfully');
+        loadProducts();
+      }
+    }
+
+    async function loadProducts() {
+      const { data, error } = await supabase.from('products').select('*');
+
+      const productsContainer = document.getElementById('productsContainer');
+      productsContainer.innerHTML = '';
+      data.forEach(product => {
+        const productElement = document.createElement('div');
+        productElement.classList.add('product');
+        productElement.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>${product.description}</p>
+          <p>Price: $${product.price}</p>
+          <button onclick="deleteProduct('${product.id}')">Delete</button>
+        `;
+        productsContainer.appendChild(productElement);
+      });
+    }
+
+    async function deleteProduct(id) {
+      const { data, error } = await supabase
+        .from('products')
+        .delete()
+        .eq('id', id);
+
+      if (error) {
+        alert('Error deleting product');
+      } else {
+        alert('Product deleted successfully');
+        loadProducts();
+      }
+    }
+
+    window.onload = loadProducts;
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Admin Dashboard</h1>
+    <button onclick="window.location.href='admin-login.html'">Logout</button>
+  </header>
+  <main>
+    <section>
+      <h2>Add Product</h2>
+      <form onsubmit="addProduct(event)">
+        <input type="text" id="name" placeholder="Product Name" required>
+        <input type="number" id="price" placeholder="Price" required>
+        <textarea id="description" placeholder="Description" required></textarea>
+        <input type="url" id="image" placeholder="Image URL" required>
+        <button type="submit">Add Product</button>
+      </form>
+    </section>
+    <section>
+      <h2>Product List</h2>
+      <div id="productsContainer"></div>
+    </section>
+  </main>
+</body>
+</html>
