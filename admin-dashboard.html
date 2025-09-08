@@ -1,98 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard | The Daily Deal Depo</title>
-  <link rel="stylesheet" href="styles.css">
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Daily Deal Depo</title>
+<link rel="stylesheet" href="styles.css">
+<script type="module">
+if(localStorage.getItem('adminLoggedIn')!=='true'){
+  alert('Unauthorized'); window.location.href='admin-login.html';
+}
 
-    const supabase = createClient('YOUR_SUPABASE_URL', 'YOUR_SUPABASE_ANON_KEY');
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+const supabaseUrl='https://knjpzfhpharpsrnzpmvg.supabase.co';
+const supabaseKey='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtuanB6ZmhwaGFycHNybnpwbXZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTczMzg4OTgsImV4cCI6MjA3MjkxNDg5OH0.HO_p71TKAKYXEsMHoWVMgGWCk2rj9YajZs53BRRDTgU';
+const supabase = createClient(supabaseUrl,supabaseKey);
 
-    async function addProduct(e) {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const price = parseFloat(document.getElementById('price').value);
-      const description = document.getElementById('description').value;
-      const image = document.getElementById('image').value;
+async function loadProducts(){
+  const {data,error}=await supabase.from('products').select('*');
+  if(error) return console.error(error);
+  const container=document.getElementById('productsContainer');
+  container.innerHTML='';
+  data.forEach(product=>{
+    const div=document.createElement('div');
+    div.classList.add('product');
+    div.innerHTML=`
+      <img src="${product.image}" alt="${product.name}">
+      <h3>${product.name}</h3>
+      <p>${product.description}</p>
+      <p>R${product.price}</p>
+      <button onclick="editProduct('${product.id}')">Edit</button>
+      <button onclick="deleteProduct('${product.id}')">Delete</button>
+    `;
+    container.appendChild(div);
+  });
+}
 
-      const { data, error } = await supabase
-        .from('products')
-        .insert([{ name, price, description, image }]);
+async function addProduct(e){
+  e.preventDefault();
+  const name=document.getElementById('name').value;
+  const price=parseFloat(document.getElementById('price').value);
+  const description=document.getElementById('description').value;
+  const file=document.getElementById('imageFile').files[0];
 
-      if (error) {
-        alert('Error adding product');
-      } else {
-        alert('Product added successfully');
-        loadProducts();
-      }
-    }
+  // Upload image to Supabase Storage
+  const fileExt=file.name.split('.').pop();
+  const fileName=`${Date.now()}.${fileExt}`;
+  const {data:uploadData,error:uploadError}=await supabase.storage.from('product-images').upload(fileName,file);
+  if(uploadError) return alert('Image upload failed');
 
-    async function loadProducts() {
-      const { data, error } = await supabase.from('products').select('*');
+  const {publicURL}=supabase.storage.from('product-images').getPublicUrl(fileName);
 
-      const productsContainer = document.getElementById('productsContainer');
-      productsContainer.innerHTML = '';
-      data.forEach(product => {
-        const productElement = document.createElement('div');
-        productElement.classList.add('product');
-        productElement.innerHTML = `
-          <img src="${product.image}" alt="${product.name}">
-          <h3>${product.name}</h3>
-          <p>${product.description}</p>
-          <p>Price: $${product.price}</p>
-          <button onclick="deleteProduct('${product.id}')">Delete</button>
-        `;
-        productsContainer.appendChild(productElement);
-      });
-    }
+  const {error}=await supabase.from('products').insert([{name,price,description,image:publicURL}]);
+  if(error) alert('Error adding product'); else {alert('Added'); loadProducts();}
+}
 
-    async function deleteProduct(id) {
-      const { data, error } = await supabase
-        .from('products')
-        .delete()
-        .eq('id', id);
+async function deleteProduct(id){
+  await supabase.from('products').delete().eq('id',id); loadProducts();
+}
 
-      if (error) {
-        alert('Error deleting product');
-      } else {
-        alert('Product deleted successfully');
-        loadProducts();
-      }
-    }
+async function editProduct(id){
+  const name=prompt('New name:'); const price=prompt('New price:');
+  const description=prompt('New description:');
+  await supabase.from('products').update({name,price,description}).eq('id',id);
+  loadProducts();
+}
 
-    window.onload = loadProducts;
-
-
-  if (localStorage.getItem('adminLoggedIn') !== 'true') {
-    alert('You are not authorized to view this page.');
-    window.location.href = 'admin-login.html';
-  }
-
-
-  </script>
+window.onload=loadProducts;
+</script>
 </head>
 <body>
-  <header>
-    <h1>Admin Dashboard</h1>
-    <button onclick="window.location.href='admin-login.html'">Logout</button>
-  </header>
-  <main>
-    <section>
-      <h2>Add Product</h2>
-      <form onsubmit="addProduct(event)">
-        <input type="text" id="name" placeholder="Product Name" required>
-        <input type="number" id="price" placeholder="Price" required>
-        <textarea id="description" placeholder="Description" required></textarea>
-        <input type="url" id="image" placeholder="Image URL" required>
-        <button type="submit">Add Product</button>
-      </form>
-    </section>
-    <section>
-      <h2>Product List</h2>
-      <div id="productsContainer"></div>
-    </section>
-  </main>
+<header>
+<h1>Admin Dashboard</h1>
+<button onclick="localStorage.removeItem('adminLoggedIn');window.location.href='admin-login.html'">Logout</button>
+</header>
+<main>
+<section>
+<h2>Add Product</h2>
+<form onsubmit="addProduct(event)">
+<input type="text" id="name" placeholder="Name" required>
+<input type="number" id="price" placeholder="Price" required>
+<textarea id="description" placeholder="Description" required></textarea>
+<input type="file" id="imageFile" accept="image/*" required>
+<button type="submit">Add Product</button>
+</form>
+</section>
+<section>
+<h2>Product List</h2>
+<div id="productsContainer"></div>
+</section>
+</main>
 </body>
 </html>
