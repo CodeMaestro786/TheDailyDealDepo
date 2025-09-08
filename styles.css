@@ -1,4 +1,20 @@
 /* ===== RESET ===== */
+body{font-family:Segoe UI,Tahoma,Verdana,sans-serif;margin:0;padding:0;background:#fafafa;}
+header{background:#1a1a1a;color:#fff;padding:1rem;display:flex;justify-content:space-between;align-items:center;}
+header h1{margin:0;font-size:1.5rem;}
+button, .btn{cursor:pointer;padding:.6rem 1.2rem;border-radius:.5rem;border:none;font-weight:600;}
+.btn-primary{background:#0077ff;color:#fff;} .btn-primary:hover{background:#005fcc;}
+.btn-ghost{border:2px solid #fff;color:#fff;} .btn-ghost:hover{background:#fff;color:#222;}
+.container{width:90%;max-width:1200px;margin:auto;}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:2rem;padding:3rem;background:linear-gradient(135deg,#0077ff,#00c6ff);color:#fff;}
+.hero img{border-radius:1rem;box-shadow:0 10px 30px rgba(0,0,0,.2);}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem;}
+.card, .product{background:#fff;border-radius:.8rem;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.08);padding:1rem;transition:.3s;}
+.card img, .product img{width:100%;border-radius:.5rem;margin-bottom:.5rem;}
+.card:hover, .product:hover{transform:translateY(-6px);box-shadow:0 8px 18px rgba(0,0,0,.15);}
+input, textarea{width:100%;padding:.6rem;margin:.5rem 0;border-radius:.5rem;border:1px solid #ccc;}
+.login-box{max-width:400px;margin:5rem auto;padding:2rem;background:#fff;border-radius:1rem;box-shadow:0 8px 20px rgba(0,0,0,.15);text-align:center;}
+
 * {
   margin: 0;
   padding: 0;
@@ -259,3 +275,4 @@ a { text-decoration: none; color: inherit; }
   .hero-grid { grid-template-columns: 1fr; }
   .header-grid { flex-direction: column; align-items: flex-start; gap: 1rem; }
 }
+
